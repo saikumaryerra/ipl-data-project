@@ -1,6 +1,3 @@
-import matplotlib.pyplot as plt
-
-
 def team_short_names(teams_set):
 	team_short=[]
 	for i in teams_set:

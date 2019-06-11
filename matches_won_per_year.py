@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import csv
 import random
-from fun_used import *
+# from fun_used import *
+import utilities
 
 with open('matches.csv', 'r') as matches_csv:
     matches_reader = csv.DictReader(matches_csv)
@@ -36,7 +37,7 @@ with open('matches.csv', 'r') as matches_csv:
             matches_won_per_season[i['season']]={i['winner']:1}
     
     #sorting the dictionary
-    matches_won_per_season=sort_dict(matches_won_per_season)
+    matches_won_per_season=utilities.sort_dict(matches_won_per_season)
     teams_set=list(teams_set)
     teams_set=sorted(teams_set)
     # print(teams_set)
@@ -46,7 +47,7 @@ with open('matches.csv', 'r') as matches_csv:
             if j not in matches_won_per_season[i]:
                 matches_won_per_season[i][j]=0
     for i in matches_won_per_season:
-        matches_won_per_season[i]=sort_dict(matches_won_per_season[i])
+        matches_won_per_season[i]=utilities.sort_dict(matches_won_per_season[i])
     
     #for ploy
     lst_temp=[0]*len(matches_won_per_season)
@@ -68,7 +69,7 @@ with open('matches.csv', 'r') as matches_csv:
     #     for i in letters:
     #         s+=i
     #     teams_short_names.append(s)
-    teams_in_short=team_short_names(teams_set)
+    teams_in_short=utilities.team_short_names(teams_set)
 
 
     plt.legend(teams_in_short,ncol=5)

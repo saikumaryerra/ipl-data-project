@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import csv
-from fun_used import *
+# from fun_used import *
+import utilities
 with open('matches.csv') as matches_csv:
     matches_reader = csv.DictReader(matches_csv)
     match_id_2016 = []
@@ -24,6 +25,6 @@ with open('deliveries.csv') as deliveries_csv:
             k=teams_2016.index(bowling_team)
             extra_runs[k]=extra_runs[k]+int(i['extra_runs'])
 # print(extra_runs)
-teams_2016=team_short_names(teams_2016)
+teams_2016=utilities.team_short_names(teams_2016)
 plt.bar(teams_2016,extra_runs)
 plt.show()

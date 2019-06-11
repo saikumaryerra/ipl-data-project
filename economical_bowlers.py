@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import csv
-from fun_used import *
+import utilities
 with open('matches.csv') as matches_csv:
     matches_reader = csv.DictReader(matches_csv)
     match_id_2015 = []
