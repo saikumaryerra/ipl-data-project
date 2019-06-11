@@ -128,5 +128,9 @@ dmypy.json
 !.vscode/extensions.json
 
 
+.~lock.deliveries.csv#
+.~lock.matches.csv#
+
+
 # Pyre type checker
 .pyre/

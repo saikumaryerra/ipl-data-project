@@ -27,9 +27,11 @@ def count_of_elements_in_row(x, reader_name):
             output[matches[x]] = 1
     y = sort_dict(output)
     return y
-def bar_graph_from_dictionary(x):
+def bar_graph_from_dictionary(x,x_label='',y_label=''):
     plt.bar(x.keys(),x.values())
-    plt.show()
+    plt.xlabel(x_label)
+    plt.ylabel(y_label)
+    # plt.show()
 
 def stacked_bar_graph_from_nested_dictionary(x):
     lst_temp=[0]*len(x)

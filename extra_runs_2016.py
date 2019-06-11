@@ -31,3 +31,4 @@ for team in extra_runs:
     i+=1
 #plot
 utilities.bar_graph_from_dictionary(extra_runs_with_short_name)
+plt.show()

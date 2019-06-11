@@ -32,3 +32,4 @@ with open('matches.csv', 'r') as matches_csv:
 
     #for plot
     utilities.stacked_bar_graph_from_nested_dictionary(matches_won_per_season)
+    plt.show()
