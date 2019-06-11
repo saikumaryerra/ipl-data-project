@@ -1,3 +1,6 @@
+import matplotlib.pyplot as plt
+import random
+import utilities
 def team_short_names(teams_set):
 	team_short=[]
 	for i in teams_set:
@@ -15,31 +18,33 @@ def sort_dict(dic):
     return output
 
 
-def data_count(x, reader_name):
-
-    # using Lists
-    # output_x=[]
-    # output_y=[]
-    # for i in reader_name:
-    # 	if i[x] in output_x:
-    # 		j=output_x.index(i[x])
-    # 		output_y[j]=output_y[j]+1
-    # 	else:
-    # 		output_x.append(i[x])
-    # 		output_y.append(1)
-    # return output_x,output_y
-
-    # using dictionaries
+def count_of_elements_in_row(x, reader_name):
     output = {}
-    for i in reader_name:
-        if i[x] in output.keys():
-            output[i[x]] = output[i[x]]+1
+    for matches in reader_name:
+        if matches[x] in output:
+            output[matches[x]] = output[matches[x]]+1
         else:
-            output[i[x]] = 1
-    # plt.bar(output.keys(),output.values())
-    # plt.show()
-    # y={}
-    # for key in sorted(output):
-    # 	y[key]=output[key]
+            output[matches[x]] = 1
     y = sort_dict(output)
     return y
+def bar_graph_from_dictionary(x):
+    plt.bar(x.keys(),x.values())
+    plt.show()
+
+def stacked_bar_graph_from_nested_dictionary(x):
+    lst_temp=[0]*len(x)
+    keys_in_nested_dictionary=list(x[list(x)[0]])
+    for team in keys_in_nested_dictionary:
+        color_1=random.randint(1,9)*0.1
+        color_2=random.randint(1,9)*0.1
+        color_3=random.randint(1,9)*0.1
+        lst=[]
+        for season in x:
+            lst.append(x[season][team])
+        plt.bar(x.keys(),lst,bottom=lst_temp,color=(color_1,color_2,color_3,1))
+        for i in range(len(lst)):
+            lst_temp[i]=lst_temp[i]+lst[i]
+    
+    teams_in_short=utilities.team_short_names(keys_in_nested_dictionary)
+    plt.legend(teams_in_short,ncol=5)
+    plt.show()
