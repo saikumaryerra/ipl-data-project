@@ -34,30 +34,41 @@ with open('matches.csv', 'r') as matches_csv:
                 k[i['winner']]=1
         else:
             matches_won_per_season[i['season']]={i['winner']:1}
+    
+    #sorting the dictionary
     matches_won_per_season=sort_dict(matches_won_per_season)
     teams_set=list(teams_set)
     teams_set=sorted(teams_set)
-    print(teams_set)
+    # print(teams_set)
+
     for i in matches_won_per_season:
         for j in teams_set:
             if j not in matches_won_per_season[i]:
                 matches_won_per_season[i][j]=0
     for i in matches_won_per_season:
         matches_won_per_season[i]=sort_dict(matches_won_per_season[i])
-    # print(matches_won_per_season)
+    
+    #for ploy
     lst_temp=[0]*len(matches_won_per_season)
-    # l=0.2
     for i in teams_set:
-        q=random.randint(0,10)*0.1
-        w=random.randint(0,10)*0.1
-        e=random.randint(0,10)*0.1
+        q=random.randint(1,9)*0.1
+        w=random.randint(1,9)*0.1
+        e=random.randint(1,9)*0.1
         lst=[]
         for j in matches_won_per_season.keys():
             lst.append(matches_won_per_season[j][i])
-        # plt.bar(matches_won_per_season.keys(),lst,bottom=lst_temp,color=(l,l+0.1,l-0.05,1))
         plt.bar(matches_won_per_season.keys(),lst,bottom=lst_temp,color=(q,w,e,1))
-        # l=l+0.05
         for i in range(len(lst)):
             lst_temp[i]=lst_temp[i]+lst[i]
-    plt.legend(teams_set,ncol=5)
+    
+    teams_short_names=[]
+    for i in teams_set:
+        letters=[letter[0] for letter in i.split()]
+        s=''
+        for i in letters:
+            s+=i
+        teams_short_names.append(s)
+
+
+    plt.legend(teams_short_names)
     plt.show()
