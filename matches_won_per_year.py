@@ -61,14 +61,15 @@ with open('matches.csv', 'r') as matches_csv:
         for i in range(len(lst)):
             lst_temp[i]=lst_temp[i]+lst[i]
     
-    teams_short_names=[]
-    for i in teams_set:
-        letters=[letter[0] for letter in i.split()]
-        s=''
-        for i in letters:
-            s+=i
-        teams_short_names.append(s)
+    # teams_short_names=[]
+    # for i in teams_set:
+    #     letters=[letter[0] for letter in i.split()]
+    #     s=''
+    #     for i in letters:
+    #         s+=i
+    #     teams_short_names.append(s)
+    teams_in_short=team_short_names(teams_set)
 
 
-    plt.legend(teams_short_names,ncol=5)
+    plt.legend(teams_in_short,ncol=5)
     plt.show()
