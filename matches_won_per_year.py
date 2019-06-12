@@ -41,4 +41,4 @@ def calculate_and_plot_matches_won_per_year(matches_file_path):
     plot_matches_won_per_year(result)
 
 if __name__ == '__main__':
-    calculate_and_plot_matches_won_per_year('./matches.csv')
+    calculate_and_plot_matches_won_per_year('./ipl/matches.csv')

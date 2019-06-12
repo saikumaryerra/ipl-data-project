@@ -67,4 +67,4 @@ def calculate_and_plot_best_entertainer(matches_file_path, deliveries_file_path)
     plot_best_entertainer(result_1,result_2,result_3,result_4,result_5)
 
 if __name__ == '__main__':
-    calculate_and_plot_best_entertainer('./matches.csv','./deliveries.csv')
+    calculate_and_plot_best_entertainer('./ipl/matches.csv','./ipl/deliveries.csv')

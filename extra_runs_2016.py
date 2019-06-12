@@ -43,4 +43,4 @@ def calculate_and_plot_extra_runs_2016(matches_file_path, deliveries_file_path):
     plot_extra_runs_2016(result)
 
 if __name__ == '__main__':
-    calculate_and_plot_extra_runs_2016('./matches.csv','./deliveries.csv')
+    calculate_and_plot_extra_runs_2016('./ipl/matches.csv','./ipl/deliveries.csv')

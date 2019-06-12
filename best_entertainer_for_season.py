@@ -2,7 +2,9 @@ import csv
 import matplotlib.pyplot as plt
 import utilities
 
-def best_entertainer_for_season(matches_file_path, deliveries_file_path):
+
+def best_entertainer_for_season(matches_file_path, deliveries_file_path,current_season_name):
+    current_season=current_season_name
     with open(matches_file_path) as matches_csv:
         matches_reader = csv.DictReader(matches_csv)
         match_id_current_season = set()
@@ -62,10 +64,10 @@ def plot_best_entertainer_for_season(entertainment, average_score, boundaries_sh
     utilities.bar_graph_from_dictionary(boundaries_short_name, 'team', 'boundaries')
     plt.show()
 
-def calculate_and_plot_best_entertainer_for_season(matches_file_path, deliveries_file_path):
-    result_1,result_2,result_3,result_4,result_5= best_entertainer_for_season(matches_file_path, deliveries_file_path)
+def calculate_and_plot_best_entertainer_for_season(matches_file_path, deliveries_file_path,match_id_current_season):
+    result_1,result_2,result_3,result_4,result_5= best_entertainer_for_season(matches_file_path, deliveries_file_path,current_season)
     plot_best_entertainer_for_season(result_1,result_2,result_3,result_4,result_5)
 
 if __name__ == '__main__':
     current_season=input("enter season \n")
-    calculate_and_plot_best_entertainer_for_season('./matches.csv','./deliveries.csv')
+    calculate_and_plot_best_entertainer_for_season('./ipl/matches.csv','./ipl/deliveries.csv',current_season)

@@ -47,4 +47,4 @@ def calculate_and_plot_economical_bowlers(matches_file_path, deliveries_file_pat
     plot_economical_bowlers(result_1,result_2)
 
 if __name__ == '__main__':
-    calculate_and_plot_economical_bowlers('./matches.csv','./deliveries.csv')
+    calculate_and_plot_economical_bowlers('./ipl/matches.csv','./ipl/deliveries.csv')

@@ -6,6 +6,7 @@ def matches_per_year(matches_file_path):
 	with open(matches_file_path,'r') as matches_csv:
 		matches_reader = csv.DictReader(matches_csv)
 		x=utilities.count_of_elements_in_row('season',matches_reader)
+	print(x)
 	return x
 
 def plot_matches_per_year(data):
@@ -17,4 +18,4 @@ def calculate_and_plot_matches_per_year(matches_file_path):
     plot_matches_per_year(result)
 
 if __name__ == '__main__':
-    calculate_and_plot_matches_per_year('./matches.csv')
+    calculate_and_plot_matches_per_year('./ipl/matches.csv')
