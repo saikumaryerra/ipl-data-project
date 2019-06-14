@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
+import psycopg2 as pg
 import random
 import utilities
+
 def team_short_names(teams_set):
 	team_short=[]
 	for i in teams_set:
@@ -50,3 +52,8 @@ def stacked_bar_graph_from_nested_dictionary(x):
     teams_in_short=utilities.team_short_names(keys_in_nested_dictionary)
     plt.legend(teams_in_short,ncol=5)
     plt.show()
+
+def database_connect():
+    con = pg.connect(database="ipl", user="postgres", password="test123", host="127.0.0.1", port="5432")
+    cur = con.cursor()
+    return con,cur

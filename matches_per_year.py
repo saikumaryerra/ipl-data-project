@@ -17,5 +17,19 @@ def calculate_and_plot_matches_per_year(matches_file_path):
     result = matches_per_year(matches_file_path)
     plot_matches_per_year(result)
 
+def matches_per_year_from_database(table_name='matches'):
+	con,cur=utilities.database_connect()
+	cur.execute('select season,count(*) from '+table_name+' group by season')
+	rows=cur.fetchall()
+	data={}
+	for season,matches in rows:
+		data[season]=matches
+	con.commit()  
+	con.close()
+	# plot_matches_per_year(data)
+	return data
+
 if __name__ == '__main__':
     calculate_and_plot_matches_per_year('./ipl/matches.csv')
+	# x=matches_per_year_from_database()
+	# plot_matches_per_year(x)
