@@ -26,10 +26,9 @@ def matches_per_year_from_database(table_name='matches'):
 		data[season]=matches
 	con.commit()  
 	con.close()
-	# plot_matches_per_year(data)
+	plot_matches_per_year(data)
 	return data
 
 if __name__ == '__main__':
-    calculate_and_plot_matches_per_year('./ipl/matches.csv')
-	# x=matches_per_year_from_database()
-	# plot_matches_per_year(x)
+    # calculate_and_plot_matches_per_year('./ipl/matches.csv')
+	matches_per_year_from_database()
