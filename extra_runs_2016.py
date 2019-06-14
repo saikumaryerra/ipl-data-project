@@ -33,6 +33,22 @@ def extra_runs_2016(matches_file_path, deliveries_file_path):
         i+=1
     return extra_runs_with_short_name
 
+def extra_runs_2016_from_database(table_name_1='matches',table_name_2='deliveries'):
+    con,cur=utilities.database_connect()
+    cur.execute('''select bowling_team,sum(extra_runs) 
+                    from '''+table_name_2+'''
+                    inner join '''+table_name_1+''' on '''+table_name_1+'''.id='''+table_name_2+'''.match_id 
+                    where '''+table_name_1+'''.season='2016'
+                    group by bowling_team''')
+    rows=cur.fetchall()
+    con.commit()
+    con.close()
+    data={}
+    for team,extra_runs in rows:
+        data[utilities.short_name(team)]=extra_runs
+    plot_extra_runs_2016(data)
+    return data
+
 #plot
 def plot_extra_runs_2016(data):
     utilities.bar_graph_from_dictionary(data,'teams','extra runs')
@@ -43,4 +59,5 @@ def calculate_and_plot_extra_runs_2016(matches_file_path, deliveries_file_path):
     plot_extra_runs_2016(result)
 
 if __name__ == '__main__':
-    calculate_and_plot_extra_runs_2016('./ipl/matches.csv','./ipl/deliveries.csv')
+    # calculate_and_plot_extra_runs_2016('./ipl/matches.csv','./ipl/deliveries.csv')
+    extra_runs_2016_from_database()

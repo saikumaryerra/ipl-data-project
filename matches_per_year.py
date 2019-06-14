@@ -6,7 +6,7 @@ def matches_per_year(matches_file_path):
 	with open(matches_file_path,'r') as matches_csv:
 		matches_reader = csv.DictReader(matches_csv)
 		x=utilities.count_of_elements_in_row('season',matches_reader)
-	print(x)
+	# print(x)
 	return x
 
 def plot_matches_per_year(data):

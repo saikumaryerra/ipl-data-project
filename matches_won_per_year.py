@@ -58,7 +58,7 @@ def matches_won_per_year_from_database(table_name='matches'):
     data=utilities.sort_dict(data)
     for season in data:
         data[season]=utilities.sort_dict(data[season])
-    # plot_matches_won_per_year(data)
+    plot_matches_won_per_year(data)
     return data
 #for plot
 def plot_matches_won_per_year(data):

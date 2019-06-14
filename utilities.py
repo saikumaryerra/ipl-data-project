@@ -12,6 +12,12 @@ def team_short_names(teams_set):
 			s+=j
 		team_short.append(s)
 	return team_short
+def short_name(team_name):
+    letters=[letter[0] for letter in team_name.split()]
+    s=''
+    for j in letters:
+        s+=j
+    return s
 
 def sort_dict(dic):
     output = {}

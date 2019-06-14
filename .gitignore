@@ -130,7 +130,10 @@ dmypy.json
 
 .~lock.deliveries.csv#
 .~lock.matches.csv#
-
+ipl/.~lock.test_matches.csv#
+ipl/.~lock.test_deliveries.csv#
+ipl/.~lock.matches.csv#
+ipl/.~lock.deliveries.csv#
 
 # Pyre type checker
 .pyre/
