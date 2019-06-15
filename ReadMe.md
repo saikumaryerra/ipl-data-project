@@ -1,6 +1,6 @@
 Data Project
 ============ 
-##IPL data set
+## IPL data set
 
 * Tasks
 1. Plot the number of matches played per year of all the years in IPL.(_matches__per__year_)
