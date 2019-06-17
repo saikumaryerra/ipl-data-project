@@ -1,7 +1,7 @@
 import csv
 import matplotlib.pyplot as plt
 import utilities
-
+import sqlFunctions as sqlF
 
 def best_entertainer(matches_file_path, deliveries_file_path):
     with open(matches_file_path) as matches_csv:
@@ -51,29 +51,7 @@ def best_entertainer(matches_file_path, deliveries_file_path):
     return entertainment, average_score, boundaries_short_name, short_team_names, top_entertainer
 
 def best_entertainer_from_database(table_name='deliveries'):
-    con,cur=utilities.database_connect()
-    cur.execute('''select batting_team,(sum(total_runs)/count(distinct match_id)),
-                sum (case when total_runs>3 then 1 else 0 end),sum(total_runs)/count(distinct match_id)*4+sum (case when total_runs>3 then 1 else 0 end)*6 as entertainment
-                from '''+table_name+'''
-                group by batting_team
-                order by entertainment desc;''')
-    rows=cur.fetchall()
-    con.commit()
-    con.close()
-    entertainment_pct=[]
-    average_score={}
-    boundaries_short_name={}
-    short_team_names=[]
-    for team,avg_score,boundaries,entertainment in rows:
-        entertainment_pct.append(entertainment)
-        k=utilities.short_name(team)
-        short_team_names.append(k)
-        average_score[k]=avg_score
-        boundaries_short_name[k]=boundaries
-    top_entertainer=rows[0][0]
-    plot_best_entertainer(entertainment_pct, average_score, boundaries_short_name, short_team_names, top_entertainer)
-    print(entertainment_pct,average_score,boundaries_short_name,short_team_names,top_entertainer)
-    return entertainment_pct,average_score,boundaries_short_name,short_team_names,top_entertainer
+    return sqlF.best_entertainer(table_name)
 
 def plot_best_entertainer(entertainment, average_score, boundaries_short_name, short_team_names, top_entertainer):
     # plotting
@@ -92,4 +70,4 @@ def calculate_and_plot_best_entertainer(matches_file_path, deliveries_file_path)
 
 if __name__ == '__main__':
     # calculate_and_plot_best_entertainer('./ipl/matches.csv','./ipl/deliveries.csv')
-    best_entertainer_from_database('test_deliveries')
+    plot_best_entertainer(*best_entertainer_from_database('test_deliveries'))

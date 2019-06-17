@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import csv
 import utilities
-
+import sqlFunctions as sqlF
 def extra_runs_2016(matches_file_path, deliveries_file_path):
     with open(matches_file_path) as matches_csv:
         matches_reader = csv.DictReader(matches_csv)
@@ -34,20 +34,7 @@ def extra_runs_2016(matches_file_path, deliveries_file_path):
     return extra_runs_with_short_name
 
 def extra_runs_2016_from_database(table_name_1='matches',table_name_2='deliveries'):
-    con,cur=utilities.database_connect()
-    cur.execute('''select bowling_team,sum(extra_runs) 
-                    from '''+table_name_2+'''
-                    inner join '''+table_name_1+''' on '''+table_name_1+'''.id='''+table_name_2+'''.match_id 
-                    where '''+table_name_1+'''.season='2016'
-                    group by bowling_team''')
-    rows=cur.fetchall()
-    con.commit()
-    con.close()
-    data={}
-    for team,extra_runs in rows:
-        data[utilities.short_name(team)]=extra_runs
-    plot_extra_runs_2016(data)
-    return data
+    return sqlF.extra_runs_2016(table_name_1,table_name_2)
 
 #plot
 def plot_extra_runs_2016(data):
@@ -60,4 +47,4 @@ def calculate_and_plot_extra_runs_2016(matches_file_path, deliveries_file_path):
 
 if __name__ == '__main__':
     # calculate_and_plot_extra_runs_2016('./ipl/matches.csv','./ipl/deliveries.csv')
-    extra_runs_2016_from_database()
+    plot_extra_runs_2016(extra_runs_2016_from_database())

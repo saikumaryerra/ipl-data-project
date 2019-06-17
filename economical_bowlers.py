@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import csv
 import utilities
 import operator
+import sqlFunctions as sqlF
 
 def economical_bowlers(matches_file_path, deliveries_file_path):
     with open(matches_file_path) as matches_csv:
@@ -48,27 +49,12 @@ def plot_economical_bowlers(data):
 	plt.show()
 
 def economical_bowlers_from_database(table_name_1='matches',table_name_2='deliveries'):
-    con,cur=utilities.database_connect()
-    cur.execute('''select bowler,
-                    cast(sum(total_runs)as float)*6/sum(case when ball <7 then 1 else 0 end) as economy
-                    from '''+table_name_2+'''
-                	inner join '''+table_name_1+''' on '''+table_name_1+'''.id='''+table_name_2+'''.match_id where season='2015'
-                    group by bowler
-                    order by economy
-                    limit 5''')
-    rows=cur.fetchall()
-    con.commit()
-    con.close()
-    data={}
-    for bowler,economy in rows:
-        data[bowler]=economy
-    plot_economical_bowlers(data)
-    return data
+    return sqlF.economical_bowlers(table_name_1,table_name_2)
 
-def calculate_and_plot_economical_bowlers(matches_file_path, deliveries_file_path):
-    result = economical_bowlers(matches_file_path, deliveries_file_path)
-    plot_economical_bowlers(result)
+# def calculate_and_plot_economical_bowlers(matches_file_path, deliveries_file_path):
+#     result = economical_bowlers(matches_file_path, deliveries_file_path)
+#     plot_economical_bowlers(result)
 
 if __name__ == '__main__':
     # calculate_and_plot_economical_bowlers('./ipl/matches.csv','./ipl/deliveries.csv')
-    economical_bowlers_from_database()
+    plot_economical_bowlers(economical_bowlers_from_database())
